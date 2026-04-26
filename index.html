@@ -466,14 +466,41 @@ footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
 <!-- CONTACT -->
 <section id="contact" class="section cta-section">
   <div class="section-inner">
+
     <div class="slabel fade-up">Contact</div>
-    <h2 class="fade-up d1" style="max-width:520px;margin:0 auto 16px;">Discutons de votre projet</h2>
-    <p class="cta-sub fade-up d2" style="max-width:460px;margin:0 auto 40px;">Disponibles pour échanger sur vos besoins spécifiques et proposer une organisation adaptée à votre volume de modération.</p>
-    <div class="cta-actions fade-up d3">
-      <a href="mailto:contact@moderashield.com" class="btn-white">Envoyer un email</a>
-      <a href="#services" class="btn-ghost">Voir nos services</a>
+
+    <h2 class="fade-up d1" style="max-width:520px;margin:0 auto 16px;">
+      Discutons de votre projet
+    </h2>
+
+    <p class="cta-sub fade-up d2" style="max-width:460px;margin:0 auto 40px;">
+      Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.
+    </p>
+
+    <form action="https://formspree.io/f/mgorbkvv" method="POST"
+      style="max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"
+      class="fade-up d3">
+
+      <input type="text" name="name" placeholder="Votre nom" required
+        style="padding:14px;border-radius:8px;border:none;">
+
+      <input type="email" name="email" placeholder="Votre email" required
+        style="padding:14px;border-radius:8px;border:none;">
+
+      <textarea name="message" placeholder="Votre message" required rows="5"
+        style="padding:14px;border-radius:8px;border:none;"></textarea>
+
+      <button type="submit"
+        style="padding:14px;border-radius:8px;background:#fff;color:#0f172a;font-weight:600;border:none;cursor:pointer;">
+        Envoyer
+      </button>
+
+    </form>
+
+    <div class="cta-info fade-up d4" style="margin-top:20px;">
+      <a href="mailto:contact@moderashield.com">contact@moderashield.com</a>
     </div>
-    <div class="cta-info fade-up d4"><a href="mailto:contact@moderashield.com">contact@moderashield.com</a></div>
+
   </div>
 </section>
 
