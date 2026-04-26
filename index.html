@@ -3,286 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModeraShield | Modération de Contenus</title>
+<title>ModeraShield | Modération de Contenu</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --blue-dark: #0f172a;
-  --blue-mid: #1e3a8a;
-  --blue: #2563eb;
-  --blue-light: #dbeafe;
-  --surface: #f8fafc;
-  --white: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
+  --dark:   #060e1f;
+  --navy:   #0f2250;
+  --blue:   #1e3a8a;
+  --bluev:  #2563eb;
+  --bluelt: #dbeafe;
+  --surface:#f8fafc;
+  --white:  #ffffff;
+  --text:   #0f172a;
+  --muted:  #64748b;
   --border: rgba(0,0,0,0.07);
-  --font-display: 'DM Serif Display', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --fd: 'DM Serif Display', serif;
+  --fb: 'DM Sans', sans-serif;
 }
-
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--text); background: var(--white); overflow-x: hidden; }
+body { font-family: var(--fb); color: var(--text); background: var(--white); overflow-x: hidden; }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 0.5px solid var(--border);
-}
-.nav-inner {
-  max-width: 1120px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2rem; height: 68px;
-}
-.logo {
-  font-family: var(--font-body); font-weight: 500;
-  font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--blue-mid); text-decoration: none;
-}
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.93); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-weight: 500; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); text-decoration: none; }
 .nav-links { display: flex; gap: 2.5rem; }
-.nav-links a {
-  font-size: 14px; color: var(--muted); text-decoration: none;
-  transition: color 0.2s;
-}
+.nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--text); }
-.nav-cta {
-  background: var(--blue-dark); color: #fff;
-  font-family: var(--font-body); font-size: 13px; font-weight: 400;
-  padding: 10px 22px; border-radius: 6px; text-decoration: none;
-  transition: background 0.2s; letter-spacing: 0.01em;
-}
-.nav-cta:hover { background: var(--blue-mid); }
+.nav-cta { background: var(--dark); color: #fff; font-size: 13px; padding: 10px 22px; border-radius: 6px; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--blue); }
 
 /* ── HERO ── */
 .hero {
-  position: relative; min-height: 100vh;
-  display: flex; align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 50%, #1a3a8a 100%);
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  padding-top: 68px;
   overflow: hidden;
+  position: relative;
 }
-.hero-bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #060e1f 0%, #0f2250 50%, #1a3a8a 100%);
-}
-.hero-img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; opacity: 0.28; mix-blend-mode: luminosity;
-}
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(6,14,31,0.85) 0%, rgba(6,14,31,0.3) 100%);
-}
-.hero-inner {
-  position: relative; z-index: 2;
-  max-width: 1120px; margin: 0 auto; padding: 0 2rem;
-  padding-top: 80px;
-  display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
-  width: 100%;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.08);
-  border: 0.5px solid rgba(255,255,255,0.18);
-  border-radius: 20px; padding: 6px 16px;
-  font-size: 12px; color: rgba(255,255,255,0.7);
-  letter-spacing: 0.06em; margin-bottom: 28px;
-}
-.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 5vw, 58px);
-  color: #fff; line-height: 1.1;
-  margin-bottom: 24px;
-  font-weight: 400;
-}
-.hero h1 em { font-style: italic; color: rgba(255,255,255,0.55); }
-.hero-sub {
-  font-size: 16px; color: rgba(255,255,255,0.58);
-  line-height: 1.75; margin-bottom: 40px; max-width: 440px;
-  font-weight: 300;
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-white {
-  background: #fff; color: var(--blue-dark);
-  font-family: var(--font-body); font-size: 14px; font-weight: 500;
-  padding: 13px 28px; border-radius: 7px; text-decoration: none;
-  transition: opacity 0.2s;
-}
-.btn-white:hover { opacity: 0.88; }
-.btn-ghost {
-  background: rgba(255,255,255,0.08); color: #fff;
-  border: 0.5px solid rgba(255,255,255,0.22);
-  font-family: var(--font-body); font-size: 14px;
-  padding: 13px 28px; border-radius: 7px; text-decoration: none;
-  transition: background 0.2s;
-}
-.btn-ghost:hover { background: rgba(255,255,255,0.15); }
 
-/* Hero dashboard widget */
-.hero-card {
-  background: rgba(255,255,255,0.05);
-  border: 0.5px solid rgba(255,255,255,0.14);
-  border-radius: 16px; padding: 28px;
-  backdrop-filter: blur(4px);
-}
-.dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.dash-title { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; }
-.live-badge {
-  background: rgba(74,222,128,0.15); color: #4ade80;
-  font-size: 11px; padding: 4px 10px; border-radius: 12px;
-  border: 0.5px solid rgba(74,222,128,0.3);
-}
-.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
-.stat-c { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 12px; }
-.stat-v { font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 3px; }
-.stat-l { font-size: 10px; color: rgba(255,255,255,0.42); }
-.feed-lbl { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-.feed-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 0.5px solid rgba(255,255,255,0.07); }
-.tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
-.tag-ok  { background: rgba(74,222,128,0.15); color: #4ade80; }
-.tag-bad { background: rgba(248,113,113,0.15); color: #f87171; }
-.tag-warn{ background: rgba(251,191,36,0.15); color: #fbbf24; }
-.feed-text { font-size: 12px; color: rgba(255,255,255,0.45); flex: 1; }
-.feed-time { font-size: 11px; color: rgba(255,255,255,0.25); }
-
-/* ── TRUSTED ── */
-.trusted { background: var(--white); border-top: 0.5px solid var(--border); padding: 28px 2rem; }
-.trusted-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
-.trusted-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
-.trusted-logos { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
-.trusted-logos span { font-size: 14px; color: #94a3b8; font-weight: 500; letter-spacing: 0.04em; }
-
-/* ── SECTION BASE ── */
-.section { padding: 96px 2rem; }
-.section-inner { max-width: 1120px; margin: 0 auto; }
-.label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
-h2 {
-  font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px);
-  font-weight: 400; line-height: 1.2; letter-spacing: -0.01em;
-  margin-bottom: 16px;
-}
-.section-sub { font-size: 16px; color: var(--muted); line-height: 1.75; font-weight: 300; }
-
-/* ── PROBLEM ── */
-.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 52px; }
-.problem-list { display: flex; flex-direction: column; gap: 16px; }
-.problem-item {
-  display: flex; gap: 16px; padding: 20px;
-  background: var(--surface); border-radius: 12px;
-  border: 0.5px solid var(--border);
-}
-.prob-icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.prob-icon.r { background: #fee2e2; }
-.prob-icon.y { background: #fef9c3; }
-.prob-icon.b { background: var(--blue-light); }
-.prob-title { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
-.prob-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-.chart-box { background: var(--surface); border-radius: 16px; border: 0.5px solid var(--border); padding: 28px; }
-.chart-lbl { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
-.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.bar-name { font-size: 12px; color: var(--muted); width: 110px; flex-shrink: 0; }
-.bar-track { flex: 1; background: #e2e8f0; border-radius: 4px; height: 7px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 4px; }
-.bar-fill.r { background: #ef4444; }
-.bar-fill.g { background: #22c55e; }
-.bar-pct { font-size: 12px; font-weight: 500; width: 40px; text-align: right; }
-.divider { height: 0.5px; background: var(--border); margin: 20px 0; }
-
-/* ── SERVICES ── */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
-.service-card {
-  background: var(--white); border: 0.5px solid var(--border);
-  border-radius: 14px; padding: 28px;
-  transition: border-color 0.25s, box-shadow 0.25s;
-  cursor: default;
-}
-.service-card:hover {
-  border-color: rgba(37,99,235,0.25);
-  box-shadow: 0 4px 28px rgba(37,99,235,0.07);
-}
-.svc-icon {
-  width: 44px; height: 44px; border-radius: 10px;
-  background: var(--blue-light); margin-bottom: 18px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-}
-.svc-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
-.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-/* ── PROCESS ── */
-.process-section { background: var(--blue-dark); }
-.process-section h2 { color: #fff; }
-.process-section .label { color: rgba(255,255,255,0.4); }
-.process-section .section-sub { color: rgba(255,255,255,0.45); }
-.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 52px; position: relative; }
-.steps::before {
+/* subtle grid texture */
+.hero::before {
   content: '';
-  position: absolute; top: 28px; left: 12.5%; right: 12.5%;
-  height: 0.5px; background: rgba(255,255,255,0.1); z-index: 0;
-}
-.step { text-align: center; position: relative; z-index: 1; padding: 0 16px; }
-.step-num {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15);
-  color: #fff; font-size: 18px; font-family: var(--font-display);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-}
-.step-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; }
-.step-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; }
-
-/* ── RESULTS ── */
-.results-section { background: var(--surface); }
-.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 52px; }
-.result-card {
-  background: var(--white); border: 0.5px solid var(--border);
-  border-radius: 14px; padding: 28px 24px; text-align: center;
-}
-.result-val {
-  font-family: var(--font-display); font-size: 42px; font-weight: 400;
-  color: var(--blue-mid); margin-bottom: 8px; line-height: 1;
-}
-.result-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-/* ── CTA ── */
-.cta-section {
-  background: linear-gradient(135deg, #060e1f 0%, #0f2250 60%, #1e3a8a 100%);
-  text-align: center; position: relative; overflow: hidden;
-}
-.cta-section::before {
-  content: '';
-  position: absolute; inset: -60px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.25) 0%, transparent 65%);
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
   pointer-events: none;
 }
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 60px 80px 80px;
+  position: relative; z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.06em;
+  margin-bottom: 32px; width: fit-content;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+
+.hero h1 {
+  font-family: var(--fd); font-size: clamp(40px, 4.5vw, 58px);
+  color: #fff; line-height: 1.08; font-weight: 400; margin-bottom: 24px;
+}
+.hero h1 em { font-style: italic; color: rgba(255,255,255,0.45); display: block; }
+
+.hero-sub {
+  font-size: 16px; color: rgba(255,255,255,0.52);
+  line-height: 1.8; font-weight: 300; margin-bottom: 48px; max-width: 420px;
+}
+
+/* THE one stat */
+.hero-kpi {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 24px 28px;
+  margin-bottom: 44px; width: fit-content;
+  display: flex; align-items: center; gap: 20px;
+}
+.kpi-num {
+  font-family: var(--fd); font-size: 48px; color: #fff;
+  line-height: 1; white-space: nowrap;
+}
+.kpi-right {}
+.kpi-label { font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 500; margin-bottom: 3px; }
+.kpi-sub { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.5; }
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-white { background: #fff; color: var(--dark); font-size: 14px; font-weight: 500; padding: 14px 30px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
+.btn-white:hover { opacity: 0.88; }
+.btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 0.5px solid rgba(255,255,255,0.2); font-size: 14px; padding: 14px 30px; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+/* Photo droite — boss shot */
+.hero-photo {
+  position: relative; z-index: 2;
+  display: flex; align-items: flex-end;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  /* Slight vignette at bottom to blend with page */
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* ── SECTIONS ── */
+.section { padding: 96px 2rem; }
+.section-inner { max-width: 1120px; margin: 0 auto; }
+.slabel { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bluev); margin-bottom: 14px; }
+h2 { font-family: var(--fd); font-size: clamp(28px, 3.5vw, 42px); font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 16px; }
+.ssub { font-size: 16px; color: var(--muted); line-height: 1.75; font-weight: 300; max-width: 540px; }
+
+/* À PROPOS */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 52px; }
+.about-text p { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 16px; font-weight: 300; }
+.about-text strong { color: var(--text); font-weight: 500; }
+.guarantees { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+.guarantee { display: flex; align-items: flex-start; gap: 10px; }
+.gcheck { width: 20px; height: 20px; border-radius: 50%; background: var(--bluelt); color: var(--bluev); display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+.gtext { font-size: 14px; color: var(--text); line-height: 1.5; }
+.capacity-box { background: var(--surface); border-radius: 16px; border: 0.5px solid var(--border); padding: 32px; }
+.cap-title { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+.cap-stat { margin-bottom: 24px; }
+.cap-stat-v { font-family: var(--fd); font-size: 36px; color: var(--blue); line-height: 1; margin-bottom: 6px; }
+.cap-stat-l { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.cap-divider { height: 0.5px; background: var(--border); margin: 24px 0; }
+.cap-list { display: flex; flex-direction: column; gap: 10px; }
+.cap-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text); }
+.cap-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--bluev); flex-shrink: 0; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+.service-card { background: var(--white); border: 0.5px solid var(--border); border-radius: 14px; padding: 28px; transition: border-color 0.25s, box-shadow 0.25s; }
+.service-card:hover { border-color: rgba(37,99,235,0.25); box-shadow: 0 4px 28px rgba(37,99,235,0.07); }
+.svc-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--bluelt); margin-bottom: 18px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.svc-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+.svc-list { display: flex; flex-direction: column; gap: 6px; }
+.svc-list li { font-size: 12px; color: var(--muted); list-style: none; display: flex; align-items: flex-start; gap: 6px; line-height: 1.5; }
+.svc-list li::before { content: '–'; color: var(--bluev); flex-shrink: 0; }
+
+/* PLATEFORMES */
+.platforms-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 52px; }
+.platform-card { background: var(--white); border: 0.5px solid var(--border); border-radius: 12px; padding: 22px 16px; text-align: center; transition: border-color 0.2s; }
+.platform-card:hover { border-color: rgba(37,99,235,0.2); }
+.platform-icon { font-size: 26px; margin-bottom: 10px; }
+.platform-name { font-size: 13px; font-weight: 500; }
+
+/* OBJECTIFS */
+.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 52px; }
+.goals-list { display: flex; flex-direction: column; gap: 14px; }
+.goal-item { display: flex; gap: 16px; padding: 20px; background: var(--white); border-radius: 12px; border: 0.5px solid var(--border); }
+.goal-icon { width: 38px; height: 38px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.g-b{background:var(--bluelt);} .g-g{background:#dcfce7;} .g-y{background:#fef9c3;} .g-p{background:#f3e8ff;}
+.goal-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.goal-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.results-col { display: flex; flex-direction: column; gap: 14px; }
+.result-card { background: var(--white); border: 0.5px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; align-items: center; gap: 20px; }
+.result-val { font-family: var(--fd); font-size: 34px; color: var(--blue); line-height: 1; white-space: nowrap; min-width: 90px; }
+.result-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* PROCESS */
+.process-section { background: var(--dark); }
+.process-section h2 { color: #fff; }
+.process-section .slabel { color: rgba(255,255,255,0.35); }
+.process-section .ssub { color: rgba(255,255,255,0.42); }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 52px; position: relative; }
+.steps::before { content: ''; position: absolute; top: 27px; left: 13%; right: 13%; height: 0.5px; background: rgba(255,255,255,0.1); z-index: 0; }
+.step { text-align: center; position: relative; z-index: 1; padding: 0 16px; }
+.step-num { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.15); color: #fff; font-size: 18px; font-family: var(--fd); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.step-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: rgba(255,255,255,0.42); line-height: 1.65; }
+
+/* DISPO */
+.dispo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+.dispo-card { background: var(--white); border: 0.5px solid var(--border); border-radius: 14px; padding: 28px; }
+.dispo-icon { font-size: 26px; margin-bottom: 14px; }
+.dispo-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+.dispo-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* CTA */
+.cta-section { background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, var(--blue) 100%); text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: -60px; background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.25) 0%, transparent 65%); pointer-events: none; }
 .cta-section h2 { color: #fff; position: relative; }
+.cta-section .slabel { color: rgba(255,255,255,0.35); }
 .cta-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 40px; font-weight: 300; line-height: 1.7; position: relative; }
 .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
-.cta-section .label { color: rgba(255,255,255,0.35); }
+.cta-info { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.35); position: relative; }
+.cta-info a { color: rgba(255,255,255,0.55); text-decoration: none; }
 
-/* ── FOOTER ── */
-footer {
-  background: #060e1f; color: rgba(255,255,255,0.3);
-  padding: 32px 2rem; text-align: center; font-size: 13px;
-}
+footer { background: var(--dark); color: rgba(255,255,255,0.3); padding: 28px 2rem; text-align: center; font-size: 13px; }
 footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
-footer a:hover { color: rgba(255,255,255,0.7); }
 
-/* ── ANIMATIONS ── */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
-.delay-5 { transition-delay: 0.5s; }
+.d1{transition-delay:0.1s;} .d2{transition-delay:0.2s;} .d3{transition-delay:0.3s;} .d4{transition-delay:0.4s;}
 </style>
 </head>
 <body>
@@ -294,100 +222,80 @@ footer a:hover { color: rgba(255,255,255,0.7); }
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#processus">Processus</a>
-      <a href="#resultats">Résultats</a>
+      <a href="#disponibilite">Disponibilité</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Demander une démo</a>
+    <a href="#contact" class="nav-cta">Nous contacter</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <img class="hero-img" src="1000043793.jpg" alt="">
-  <div class="hero-overlay"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-badge fade-up"><span class="dot"></span> Disponible 24h/24, 7j/7</div>
-      <h1 class="fade-up delay-1">Protégez vos<br><em>plateformes</em><br>à grande échelle</h1>
-      <p class="hero-sub fade-up delay-2">Modération humaine experte pour médias, réseaux sociaux et plateformes communautaires. Réponse garantie en moins de 2h.</p>
-      <div class="hero-actions fade-up delay-3">
-        <a href="#contact" class="btn-white">Demander une démo</a>
-        <a href="#services" class="btn-ghost">Voir nos services</a>
+
+  <div class="hero-left">
+    <div class="hero-badge fade-up"><span class="dot"></span> Agence de modération de contenu</div>
+    <h1 class="fade-up d1">
+      Protégez vos espaces<br>
+      <em>numériques.</em>
+    </h1>
+    <p class="hero-sub fade-up d2">
+      Modération humaine experte pour médias, réseaux sociaux et plateformes communautaires. Rigueur éditoriale, réactivité, conformité légale.
+    </p>
+
+    <div class="hero-kpi fade-up d2">
+      <div class="kpi-num">1 900</div>
+      <div class="kpi-right">
+        <div class="kpi-label">contenus traités par jour</div>
+        <div class="kpi-sub">par modérateur, selon la complexité des contenus</div>
       </div>
     </div>
-    <div class="hero-card fade-up delay-2">
-      <div class="dash-header">
-        <span class="dash-title">Tableau de bord — temps réel</span>
-        <span class="live-badge">● Live</span>
-      </div>
-      <div class="stats-row">
-        <div class="stat-c"><div class="stat-v">12 843</div><div class="stat-l">Contenus traités</div></div>
-        <div class="stat-c"><div class="stat-v">98,4%</div><div class="stat-l">Précision</div></div>
-        <div class="stat-c"><div class="stat-v">1h 42m</div><div class="stat-l">Délai moyen</div></div>
-      </div>
-      <div class="feed-lbl">Flux récents</div>
-      <div class="feed-item"><span class="tag tag-ok">Approuvé</span><span class="feed-text">Commentaire #48291</span><span class="feed-time">il y a 2 min</span></div>
-      <div class="feed-item"><span class="tag tag-bad">Supprimé</span><span class="feed-text">Contenu signalé #48290</span><span class="feed-time">il y a 5 min</span></div>
-      <div class="feed-item"><span class="tag tag-warn">En révision</span><span class="feed-text">Publication #48289</span><span class="feed-time">il y a 8 min</span></div>
+
+    <div class="hero-actions fade-up d3">
+      <a href="#contact" class="btn-white">Nous contacter</a>
+      <a href="#services" class="btn-ghost">Voir nos services</a>
     </div>
   </div>
+
+  <div class="hero-photo">
+    <img src="1000043793.jpg" alt="ModeraShield">
+  </div>
+
 </section>
 
-<!-- TRUSTED -->
-<div class="trusted">
-  <div class="trusted-inner">
-    <span class="trusted-lbl">Ils nous font confiance</span>
-    <div class="trusted-logos">
-      <span>Médias Plus</span>
-      <span>OpenForum</span>
-      <span>StreamCity</span>
-      <span>CommuneNet</span>
-      <span>TalkSpace</span>
-    </div>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<section class="section">
+<!-- À PROPOS -->
+<section id="agence" class="section">
   <div class="section-inner">
-    <div class="label fade-up">Le problème</div>
-    <h2 class="fade-up delay-1">Les plateformes sont débordées</h2>
-    <p class="section-sub fade-up delay-2">Sans modération efficace, les risques juridiques, réputationnels et humains explosent rapidement.</p>
-    <div class="problem-grid">
-      <div class="problem-list">
-        <div class="problem-item fade-up">
-          <div class="prob-icon r">⚠️</div>
-          <div>
-            <div class="prob-title">Explosion des contenus toxiques</div>
-            <div class="prob-desc">Les volumes augmentent de 40% par an. Les outils automatiques seuls ne suffisent plus.</div>
-          </div>
-        </div>
-        <div class="problem-item fade-up delay-1">
-          <div class="prob-icon y">⚖️</div>
-          <div>
-            <div class="prob-title">Risques juridiques croissants</div>
-            <div class="prob-desc">DSA, loi HAINE, NetzDG — les régulations se durcissent dans toute l'Europe.</div>
-          </div>
-        </div>
-        <div class="problem-item fade-up delay-2">
-          <div class="prob-icon b">📉</div>
-          <div>
-            <div class="prob-title">Impact sur la réputation</div>
-            <div class="prob-desc">Un seul incident mal géré peut coûter des millions et des millions d'utilisateurs.</div>
-          </div>
+    <div class="slabel fade-up">Qui sommes-nous</div>
+    <h2 class="fade-up d1">Une expertise reconnue<br>au service de vos plateformes</h2>
+    <div class="about-grid">
+      <div class="about-text fade-up d1">
+        <p>ModeraShield est une agence spécialisée dans la <strong>modération de contenu en ligne</strong> pour médias, plateformes communautaires, réseaux sociaux et espaces de commentaires.</p>
+        <p>Nous nous adaptons entièrement à votre <strong>charte éditoriale</strong>, vos consignes spécifiques et votre ligne rédactionnelle. Chaque décision est prise avec rigueur, neutralité et dans le respect de votre audience.</p>
+        <p>Notre objectif : maintenir des espaces d'échange sains, conformes à la législation, et alignés avec les valeurs de votre marque.</p>
+        <div class="guarantees">
+          <div class="guarantee"><div class="gcheck">✓</div><span class="gtext">Rigueur et neutralité dans chaque décision</span></div>
+          <div class="guarantee"><div class="gcheck">✓</div><span class="gtext">Confidentialité totale des données traitées</span></div>
+          <div class="guarantee"><div class="gcheck">✓</div><span class="gtext">Respect strict de vos délais et procédures</span></div>
+          <div class="guarantee"><div class="gcheck">✓</div><span class="gtext">Communication fluide avec vos équipes éditoriales</span></div>
+          <div class="guarantee"><div class="gcheck">✓</div><span class="gtext">Adaptation rapide à vos outils et processus internes</span></div>
         </div>
       </div>
-      <div class="chart-box fade-up delay-1">
-        <div class="chart-lbl">Coût moyen d'un incident non modéré</div>
-        <div class="bar-row"><span class="bar-name">Amende légale</span><div class="bar-track"><div class="bar-fill r" style="width:85%"></div></div><span class="bar-pct">850k€</span></div>
-        <div class="bar-row"><span class="bar-name">Perte utilisateurs</span><div class="bar-track"><div class="bar-fill r" style="width:70%"></div></div><span class="bar-pct">−23%</span></div>
-        <div class="bar-row"><span class="bar-name">Impact médiatique</span><div class="bar-track"><div class="bar-fill r" style="width:55%"></div></div><span class="bar-pct">×12</span></div>
-        <div class="divider"></div>
-        <div class="chart-lbl">Avec ModeraShield</div>
-        <div class="bar-row"><span class="bar-name">Conformité DSA</span><div class="bar-track"><div class="bar-fill g" style="width:98%"></div></div><span class="bar-pct">98%</span></div>
-        <div class="bar-row"><span class="bar-name">Réduction risques</span><div class="bar-track"><div class="bar-fill g" style="width:91%"></div></div><span class="bar-pct">−91%</span></div>
-        <div class="bar-row"><span class="bar-name">Satisfaction équipes</span><div class="bar-track"><div class="bar-fill g" style="width:88%"></div></div><span class="bar-pct">+88%</span></div>
+      <div class="capacity-box fade-up d2">
+        <div class="cap-title">Capacité de traitement</div>
+        <div class="cap-stat">
+          <div class="cap-stat-v">1 200 – 1 900</div>
+          <div class="cap-stat-l">modérations par agent / 8h, selon la complexité des contenus</div>
+        </div>
+        <div class="cap-divider"></div>
+        <div class="cap-title">Notre approche</div>
+        <div class="cap-list">
+          <div class="cap-item"><span class="cap-dot"></span>Adaptation au niveau d'exigence éditoriale</div>
+          <div class="cap-item"><span class="cap-dot"></span>Priorisation des contenus sensibles</div>
+          <div class="cap-item"><span class="cap-dot"></span>Application stricte de votre charte de modération</div>
+          <div class="cap-item"><span class="cap-dot"></span>Réévaluation des décisions si nécessaire</div>
+          <div class="cap-item"><span class="cap-dot"></span>Suivi qualitatif continu des échanges</div>
+          <div class="cap-item"><span class="cap-dot"></span>Missions ponctuelles ou régulières possibles</div>
+        </div>
       </div>
     </div>
   </div>
@@ -396,39 +304,119 @@ footer a:hover { color: rgba(255,255,255,0.7); }
 <!-- SERVICES -->
 <section id="services" class="section" style="background: var(--surface);">
   <div class="section-inner">
-    <div class="label fade-up">Nos services</div>
-    <h2 class="fade-up delay-1">Tout ce dont votre plateforme a besoin</h2>
-    <p class="section-sub fade-up delay-2">Des équipes expertes formées à vos règles, disponibles 24h/24.</p>
+    <div class="slabel fade-up">Nos services</div>
+    <h2 class="fade-up d1">Ce que nous faisons</h2>
+    <p class="ssub fade-up d2">Des missions sur mesure, alignées avec vos règles et votre ligne éditoriale.</p>
     <div class="services-grid">
       <div class="service-card fade-up">
         <div class="svc-icon">🛡️</div>
-        <div class="svc-title">Modération de contenus</div>
-        <div class="svc-desc">Validation, signalement et suppression selon vos guidelines éditoriaux. Couverture multi-formats : texte, image, vidéo.</div>
+        <div class="svc-title">Modération de commentaires</div>
+        <div class="svc-desc">Analyse et validation avant ou après publication, selon vos consignes.</div>
+        <ul class="svc-list">
+          <li>Contenus insultants ou agressifs</li>
+          <li>Propos discriminatoires ou haineux</li>
+          <li>Contenus diffamatoires ou illégaux</li>
+          <li>Spam et autopromotion</li>
+        </ul>
       </div>
-      <div class="service-card fade-up delay-1">
+      <div class="service-card fade-up d1">
         <div class="svc-icon">🔔</div>
         <div class="svc-title">Gestion des signalements</div>
-        <div class="svc-desc">Traitement rapide des contenus signalés par vos utilisateurs avec réponse garantie sous 2h.</div>
+        <div class="svc-desc">Traitement rapide des contenus signalés par vos utilisateurs.</div>
+        <ul class="svc-list">
+          <li>Traitement par ordre de priorité</li>
+          <li>Réévaluation des décisions contestées</li>
+          <li>Suivi qualitatif des échanges</li>
+        </ul>
       </div>
-      <div class="service-card fade-up delay-2">
+      <div class="service-card fade-up d2">
         <div class="svc-icon">💬</div>
-        <div class="svc-title">Support utilisateurs</div>
-        <div class="svc-desc">Réponses pédagogiques et humaines aux utilisateurs concernés par une décision de modération.</div>
+        <div class="svc-title">Réponses aux réclamations</div>
+        <div class="svc-desc">Dialogue constructif avec les utilisateurs concernés.</div>
+        <ul class="svc-list">
+          <li>Traitement des demandes par email</li>
+          <li>Explication pédagogique des décisions</li>
+          <li>Dialogue respectueux et constructif</li>
+        </ul>
       </div>
       <div class="service-card fade-up">
-        <div class="svc-icon">📊</div>
-        <div class="svc-title">Reporting & Analytics</div>
-        <div class="svc-desc">Tableaux de bord en temps réel, rapports mensuels et insights sur les tendances et comportements.</div>
+        <div class="svc-icon">📋</div>
+        <div class="svc-title">Travail selon vos procédures</div>
+        <div class="svc-desc">Nous nous adaptons entièrement à votre organisation.</div>
+        <ul class="svc-list">
+          <li>Respect de votre charte éditoriale</li>
+          <li>Adaptation à vos consignes spécifiques</li>
+          <li>Cohérence avec votre ligne rédactionnelle</li>
+        </ul>
       </div>
-      <div class="service-card fade-up delay-1">
+      <div class="service-card fade-up d1">
         <div class="svc-icon">⚖️</div>
-        <div class="svc-title">Conformité réglementaire</div>
-        <div class="svc-desc">Veille et adaptation continue aux évolutions légales : DSA, RGPD, loi HAINE, NetzDG.</div>
+        <div class="svc-title">Conformité légale</div>
+        <div class="svc-desc">Modération alignée avec la législation en vigueur.</div>
+        <ul class="svc-list">
+          <li>Loi HAINE, DSA, RGPD</li>
+          <li>Contenus contraires à la loi</li>
+          <li>Veille réglementaire continue</li>
+        </ul>
       </div>
-      <div class="service-card fade-up delay-2">
-        <div class="svc-icon">🤖</div>
-        <div class="svc-title">Audit IA + Humain</div>
-        <div class="svc-desc">Combinaison de détection automatique et d'experts pour une précision et une couverture maximales.</div>
+      <div class="service-card fade-up d2">
+        <div class="svc-icon">📊</div>
+        <div class="svc-title">Suivi & reporting</div>
+        <div class="svc-desc">Transparence totale sur les actions réalisées.</div>
+        <ul class="svc-list">
+          <li>Suivi qualitatif régulier</li>
+          <li>Remontées d'informations utiles</li>
+          <li>Ajustements selon vos retours</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATEFORMES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="slabel fade-up">Expertise sectorielle</div>
+    <h2 class="fade-up d1">Types de plateformes pris en charge</h2>
+    <div class="platforms-grid">
+      <div class="platform-card fade-up"><div class="platform-icon">📰</div><div class="platform-name">Sites d'actualité</div></div>
+      <div class="platform-card fade-up d1"><div class="platform-icon">💬</div><div class="platform-name">Espaces commentaires</div></div>
+      <div class="platform-card fade-up d2"><div class="platform-icon">🌐</div><div class="platform-name">Réseaux sociaux</div></div>
+      <div class="platform-card fade-up d3"><div class="platform-icon">🗣️</div><div class="platform-name">Forums</div></div>
+      <div class="platform-card fade-up d4"><div class="platform-icon">👥</div><div class="platform-name">Plateformes communautaires</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIFS -->
+<section class="section" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="slabel fade-up">Nos objectifs</div>
+    <h2 class="fade-up d1">Ce que nous vous apportons</h2>
+    <div class="goals-grid">
+      <div class="goals-list">
+        <div class="goal-item fade-up">
+          <div class="goal-icon g-b">🤝</div>
+          <div><div class="goal-title">Espaces d'échange respectueux</div><div class="goal-desc">Maintenir un environnement sain et bienveillant pour vos utilisateurs.</div></div>
+        </div>
+        <div class="goal-item fade-up d1">
+          <div class="goal-icon g-g">⚖️</div>
+          <div><div class="goal-title">Réduction des risques juridiques</div><div class="goal-desc">Supprimer les contenus illégaux avant qu'ils ne vous exposent.</div></div>
+        </div>
+        <div class="goal-item fade-up d2">
+          <div class="goal-icon g-y">✨</div>
+          <div><div class="goal-title">Qualité des discussions</div><div class="goal-desc">Améliorer le niveau et la pertinence des échanges sur vos plateformes.</div></div>
+        </div>
+        <div class="goal-item fade-up d3">
+          <div class="goal-icon g-p">🏆</div>
+          <div><div class="goal-title">Image de votre marque</div><div class="goal-desc">Soutenir la réputation et la crédibilité de votre média ou plateforme.</div></div>
+        </div>
+      </div>
+      <div class="results-col fade-up d1">
+        <div class="result-card"><div class="result-val">1 900</div><div class="result-lbl">contenus traités par agent et par jour au maximum</div></div>
+        <div class="result-card"><div class="result-val">1 200</div><div class="result-lbl">contenus traités minimum selon la complexité</div></div>
+        <div class="result-card"><div class="result-val">100%</div><div class="result-lbl">aligné avec votre charte éditoriale</div></div>
+        <div class="result-card"><div class="result-val">0</div><div class="result-lbl">compromis sur la rigueur et la neutralité</div></div>
       </div>
     </div>
   </div>
@@ -437,74 +425,67 @@ footer a:hover { color: rgba(255,255,255,0.7); }
 <!-- PROCESS -->
 <section id="processus" class="section process-section">
   <div class="section-inner">
-    <div class="label fade-up">Notre processus</div>
-    <h2 class="fade-up delay-1">Opérationnel en 7 jours</h2>
-    <p class="section-sub fade-up delay-2">Un onboarding structuré pour une prise en charge rapide et sans friction.</p>
+    <div class="slabel fade-up">Notre processus</div>
+    <h2 class="fade-up d1">Comment ça fonctionne</h2>
+    <p class="ssub fade-up d2">Une prise en charge structurée, opérationnelle rapidement.</p>
     <div class="steps">
-      <div class="step fade-up">
-        <div class="step-num">1</div>
-        <div class="step-title">Analyse des besoins</div>
-        <div class="step-desc">Audit de votre plateforme et définition des règles de modération adaptées.</div>
-      </div>
-      <div class="step fade-up delay-1">
-        <div class="step-num">2</div>
-        <div class="step-title">Intégration</div>
-        <div class="step-desc">Connexion à vos outils existants et formation de l'équipe à vos guidelines.</div>
-      </div>
-      <div class="step fade-up delay-2">
-        <div class="step-num">3</div>
-        <div class="step-title">Modération active</div>
-        <div class="step-desc">Prise en charge 24h/24 avec escalade pour les cas complexes ou sensibles.</div>
-      </div>
-      <div class="step fade-up delay-3">
-        <div class="step-num">4</div>
-        <div class="step-title">Reporting mensuel</div>
-        <div class="step-desc">Bilan complet, recommandations et ajustements continus selon vos évolutions.</div>
-      </div>
+      <div class="step fade-up"><div class="step-num">1</div><div class="step-title">Analyse de vos besoins</div><div class="step-desc">Échange sur votre plateforme, vos volumes et vos règles éditoriales.</div></div>
+      <div class="step fade-up d1"><div class="step-num">2</div><div class="step-title">Intégration</div><div class="step-desc">Prise en main de vos outils et de votre charte de modération.</div></div>
+      <div class="step fade-up d2"><div class="step-num">3</div><div class="step-title">Modération active</div><div class="step-desc">Traitement des contenus selon vos consignes, en continu ou par plage horaire.</div></div>
+      <div class="step fade-up d3"><div class="step-num">4</div><div class="step-title">Suivi & ajustements</div><div class="step-desc">Remontées régulières et ajustements selon vos retours et évolutions.</div></div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS -->
-<section id="resultats" class="section results-section">
+<!-- DISPO -->
+<section id="disponibilite" class="section">
   <div class="section-inner">
-    <div class="label fade-up">Résultats</div>
-    <h2 class="fade-up delay-1">Ce que nos clients obtiennent</h2>
-    <p class="section-sub fade-up delay-2">Des chiffres concrets, mesurés sur l'ensemble de notre portefeuille clients.</p>
-    <div class="results-grid">
-      <div class="result-card fade-up"><div class="result-val">98%</div><div class="result-lbl">Taux de conformité réglementaire</div></div>
-      <div class="result-card fade-up delay-1"><div class="result-val">−91%</div><div class="result-lbl">Réduction des incidents signalés</div></div>
-      <div class="result-card fade-up delay-2"><div class="result-val">&lt;2h</div><div class="result-lbl">Délai moyen de traitement</div></div>
-      <div class="result-card fade-up delay-3"><div class="result-val">40M+</div><div class="result-lbl">Contenus modérés chaque mois</div></div>
+    <div class="slabel fade-up">Disponibilité</div>
+    <h2 class="fade-up d1">Flexible et adapté à vos besoins</h2>
+    <p class="ssub fade-up d2">Nous nous organisons selon votre volume et votre rythme.</p>
+    <div class="dispo-grid">
+      <div class="dispo-card fade-up">
+        <div class="dispo-icon">🕐</div>
+        <div class="dispo-title">Horaires flexibles</div>
+        <div class="dispo-desc">Nous adaptons nos horaires à vos pics d'activité et à vos besoins de couverture temporelle.</div>
+      </div>
+      <div class="dispo-card fade-up d1">
+        <div class="dispo-icon">📅</div>
+        <div class="dispo-title">Ponctuel ou régulier</div>
+        <div class="dispo-desc">Renfort temporaire ou partenariat long terme — nous nous adaptons à votre besoin.</div>
+      </div>
+      <div class="dispo-card fade-up d2">
+        <div class="dispo-icon">🔧</div>
+        <div class="dispo-title">Vos outils, vos règles</div>
+        <div class="dispo-desc">Nous travaillons directement dans vos interfaces et selon vos procédures internes.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CONTACT -->
 <section id="contact" class="section cta-section">
   <div class="section-inner">
-    <div class="label fade-up">Parlons de votre projet</div>
-    <h2 class="fade-up delay-1" style="max-width: 520px; margin: 0 auto 18px;">Prêt à sécuriser votre plateforme ?</h2>
-    <p class="cta-sub fade-up delay-2" style="max-width: 440px; margin: 0 auto 40px;">30 minutes avec notre équipe pour évaluer vos besoins et vous proposer une solution sur mesure. Sans engagement.</p>
-    <div class="cta-actions fade-up delay-3">
-      <a href="mailto:contact@moderashield.com" class="btn-white">Demander une démo gratuite</a>
-      <a href="mailto:contact@moderashield.com" class="btn-ghost">contact@moderashield.com</a>
+    <div class="slabel fade-up">Contact</div>
+    <h2 class="fade-up d1" style="max-width:520px;margin:0 auto 16px;">Discutons de votre projet</h2>
+    <p class="cta-sub fade-up d2" style="max-width:460px;margin:0 auto 40px;">Disponibles pour échanger sur vos besoins spécifiques et proposer une organisation adaptée à votre volume de modération.</p>
+    <div class="cta-actions fade-up d3">
+      <a href="mailto:contact@moderashield.com" class="btn-white">Envoyer un email</a>
+      <a href="#services" class="btn-ghost">Voir nos services</a>
     </div>
+    <div class="cta-info fade-up d4"><a href="mailto:contact@moderashield.com">contact@moderashield.com</a></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 ModeraShield — <a href="mailto:contact@moderashield.com">contact@moderashield.com</a> — Tous droits réservés</p>
+  <p>© 2026 ModeraShield — Agence de modération de contenu — <a href="mailto:contact@moderashield.com">contact@moderashield.com</a></p>
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
