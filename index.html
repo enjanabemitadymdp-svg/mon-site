@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ModeraShield | Modération Professionnelle</title>
+<title>ModeraShield | Content Moderation Experts</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -15,155 +15,186 @@
 
 <style>
 .hero-bg {
-    background: linear-gradient(120deg, #1e3a8a, #2563eb, #1e40af);
-    background-size: 200% 200%;
-    animation: gradientMove 8s ease infinite;
+    background: linear-gradient(120deg, #0f172a, #1e3a8a);
 }
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.section {
+    padding: 100px 0;
 }
-
-.card {
-    transition: all 0.4s ease;
-    cursor: pointer;
-}
-.card:hover {
-    transform: translateY(-8px);
-}
-
-.detail-box {
-    min-height: 260px;
+.img-box img {
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-white text-slate-900">
 
 <!-- NAV -->
-<nav class="fixed w-full z-50 bg-white/80 backdrop-blur shadow">
-<div class="max-w-6xl mx-auto px-6 py-4 flex justify-between">
-<div class="font-black text-xl text-blue-700">MODERASHIELD</div>
+<nav class="fixed w-full bg-white shadow z-50">
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
+<div class="font-black text-blue-700 text-xl">MODERASHIELD</div>
+<div class="space-x-6 hidden md:flex">
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#contact">Contact</a>
+</div>
 </div>
 </nav>
 
 <!-- HERO -->
-<section class="pt-32 pb-24 hero-bg text-white">
-<div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+<section class="hero-bg text-white pt-32 pb-24">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
 
-<div class="md:w-1/2">
-<h1 class="hero-title text-5xl font-extrabold mb-6">
-Modération humaine fiable et rapide
+<div>
+<h1 class="hero text-5xl font-extrabold mb-6">
+Sécurisez vos plateformes à grande échelle
 </h1>
-
-<p class="mb-8 text-lg opacity-90">
-5 ans d’expérience – précision, rigueur et respect des règles éditoriales.
+<p class="mb-8 text-lg opacity-80">
+Modération humaine experte pour médias, réseaux sociaux et plateformes communautaires.
 </p>
-
-<a href="#contact" class="bg-white text-blue-700 px-8 py-4 rounded-full font-bold">
-Contact
+<a href="#contact" class="bg-blue-600 px-8 py-4 rounded-full font-bold">
+Demander une démo
 </a>
 </div>
 
-<div class="md:w-1/2 flex justify-center">
-<img src="1000043793.jpg" class="rounded-3xl shadow-2xl w-[400px] object-cover">
+<div>
+<img src="1000043793.jpg">
 </div>
 
 </div>
 </section>
 
-<!-- MISSIONS -->
-<section class="py-24">
-<div class="max-w-6xl mx-auto px-6">
+<!-- SECTION PROBLÈME -->
+<section class="section bg-slate-50">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+<div class="img-box">
+<img src="https://images.unsplash.com/photo-1553877522-43269d4ea984">
+</div>
+
+<div>
+<h2 class="text-3xl font-bold mb-6">Le problème</h2>
+<p class="mb-4">
+Les plateformes font face à une explosion de contenus toxiques, illégaux ou nuisibles.
+</p>
+<p>
+Sans modération efficace, les risques juridiques et réputationnels explosent.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- SECTION SOLUTION -->
+<section class="section">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+<div>
+<h2 class="text-3xl font-bold mb-6">Notre solution</h2>
+<p class="mb-4">
+Une modération humaine rapide, précise et alignée avec votre ligne éditoriale.
+</p>
+<ul class="space-y-2">
+<li>✔ Détection des contenus toxiques</li>
+<li>✔ Traitement en masse</li>
+<li>✔ Respect des règles internes</li>
+</ul>
+</div>
+
+<div class="img-box">
+<img src="https://images.unsplash.com/photo-1549921296-3a6b6b1c9f9f">
+</div>
+
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section bg-slate-50">
+<div class="max-w-7xl mx-auto px-6">
 
 <h2 class="text-4xl font-black text-center mb-12">
-Services principaux
+Nos services
 </h2>
 
-<div class="grid md:grid-cols-3 gap-6 mb-12">
+<div class="grid md:grid-cols-3 gap-8">
 
-<div class="card bg-white p-6 rounded-xl shadow" data-type="mod">
-<i class="fas fa-comment-slash text-3xl text-blue-600 mb-4"></i>
-<h3 class="font-bold">Modération de flux</h3>
+<div class="service p-8 bg-white shadow rounded-xl">
+<h3 class="font-bold mb-4">Modération</h3>
+<p>Validation et suppression des contenus.</p>
 </div>
 
-<div class="card bg-white p-6 rounded-xl shadow" data-type="alert">
-<i class="fas fa-user-shield text-3xl text-blue-600 mb-4"></i>
-<h3 class="font-bold">Gestion alertes</h3>
+<div class="service p-8 bg-white shadow rounded-xl">
+<h3 class="font-bold mb-4">Signalements</h3>
+<p>Gestion rapide des contenus signalés.</p>
 </div>
 
-<div class="card bg-white p-6 rounded-xl shadow" data-type="comm">
-<i class="fas fa-comments text-3xl text-blue-600 mb-4"></i>
-<h3 class="font-bold">Relation utilisateurs</h3>
+<div class="service p-8 bg-white shadow rounded-xl">
+<h3 class="font-bold mb-4">Support utilisateurs</h3>
+<p>Réponse et pédagogie.</p>
 </div>
 
 </div>
 
-<!-- BOX DYNAMIQUE -->
-<div id="details" class="detail-box bg-white p-8 rounded-2xl shadow text-left">
-<p class="text-slate-500">Passe la souris sur un service</p>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="section">
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl font-black text-center mb-16">
+Comment ça marche
+</h2>
+
+<div class="grid md:grid-cols-4 gap-6 text-center">
+
+<div>
+<h3 class="font-bold mb-2">1</h3>
+<p>Analyse des besoins</p>
+</div>
+
+<div>
+<h3 class="font-bold mb-2">2</h3>
+<p>Intégration</p>
+</div>
+
+<div>
+<h3 class="font-bold mb-2">3</h3>
+<p>Modération active</p>
+</div>
+
+<div>
+<h3 class="font-bold mb-2">4</h3>
+<p>Reporting</p>
+</div>
+
 </div>
 
 </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="py-24 bg-slate-900 text-white text-center">
+<section id="contact" class="section bg-slate-900 text-white text-center">
 <h2 class="text-4xl font-black mb-6">Contact</h2>
-<p class="mb-6">Disponible pour missions ponctuelles ou régulières</p>
+<p class="mb-6">Discutons de votre projet</p>
 
 <a href="mailto:contact@moderashield.com"
 class="bg-blue-600 px-10 py-4 rounded-full font-bold">
-Me contacter
+Nous contacter
 </a>
 </section>
 
+<!-- GSAP -->
 <script>
-const details = document.getElementById("details");
+gsap.registerPlugin(ScrollTrigger);
 
-const content = {
-mod: `
-<h3 class="text-xl font-bold mb-4">Modération de commentaires</h3>
-<ul class="list-disc ml-6 space-y-2">
-<li>Analyse et validation avant/après publication</li>
-<li>Respect strict de la charte éditoriale</li>
-<li>Détection : insultes, haine, spam, hors sujet</li>
-</ul>
-`,
-
-alert: `
-<h3 class="text-xl font-bold mb-4">Gestion des signalements</h3>
-<ul class="list-disc ml-6 space-y-2">
-<li>Traitement rapide des contenus signalés</li>
-<li>Réévaluation des décisions</li>
-<li>Suivi qualitatif des échanges</li>
-</ul>
-`,
-
-comm: `
-<h3 class="text-xl font-bold mb-4">Relation utilisateurs</h3>
-<ul class="list-disc ml-6 space-y-2">
-<li>Réponse aux réclamations</li>
-<li>Explication pédagogique des décisions</li>
-<li>Dialogue constructif avec les utilisateurs</li>
-</ul>
-`
-};
-
-document.querySelectorAll(".card").forEach(card => {
-card.addEventListener("mouseenter", () => {
-details.innerHTML = content[card.dataset.type];
+gsap.utils.toArray("section").forEach(sec => {
+gsap.from(sec, {
+scrollTrigger: sec,
+opacity: 0,
+y: 50,
+duration: 1
 });
-});
-
-// ANIMATION GSAP
-gsap.from(".hero-title", {y:50, opacity:0, duration:1});
-gsap.from(".card", {
-scrollTrigger: ".card",
-y:50,
-opacity:0,
-stagger:0.2
 });
 </script>
 
