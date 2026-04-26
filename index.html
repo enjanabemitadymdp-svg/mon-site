@@ -1,81 +1,223 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ModeraShield | Expert en Modération</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        html { scroll-behavior: smooth; }
-        .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ModeraShield | Expert en Modération</title>
+<meta name="description" content="Services professionnels de modération de contenu pour médias et réseaux sociaux.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- GSAP PRO ANIMATION -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<style>
+html { scroll-behavior: smooth; }
+
+/* HERO ANIMATED GRADIENT */
+.hero-bg {
+    background: linear-gradient(120deg, #1e3a8a, #2563eb, #1e40af);
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* CARD EFFECT */
+.card {
+    transition: all 0.4s ease;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* GLOW EFFECT */
+.glow:hover {
+    box-shadow: 0 0 40px rgba(59,130,246,0.4);
+}
+
+/* IMAGE PARALLAX */
+.parallax {
+    transform: translateY(0);
+    transition: transform 0.2s linear;
+}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
 
-    <nav class="fixed w-full z-50 bg-white shadow-md">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-blue-700 italic uppercase">MODERA<span class="text-slate-400">SHIELD</span></div>
-            <div class="hidden md:flex space-x-8 font-bold">
-                <a href="#missions" class="hover:text-blue-600">Missions</a>
-                <a href="#contact" class="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition">Contact</a>
-            </div>
+<body class="bg-slate-50 text-slate-900">
+
+<!-- NAV -->
+<nav class="fixed w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-black text-blue-700 italic uppercase">
+            MODERA<span class="text-slate-400">SHIELD</span>
         </div>
-    </nav>
 
-    <section class="pt-32 pb-20 hero-bg text-white">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2 text-center md:text-left">
-                <span class="bg-blue-500/30 px-4 py-1 rounded-full text-sm font-bold border border-blue-300">🚀 5 ANS D'EXPÉRIENCE</span>
-                <h1 class="text-4xl md:text-6xl font-extrabold mt-6 mb-6 leading-tight">Expertise Humaine pour Espaces Sécurisés</h1>
-                <p class="text-xl opacity-90 mb-10">Solutions professionnelles pour médias et réseaux sociaux. Respect strict de votre déontologie.</p>
-                <a href="#contact" class="bg-white text-blue-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-slate-100 transition">Nous Contacter</a>
-            </div>
-            
-            <div class="md:w-1/2 flex justify-center">
-                <img src="1000043793.jpg" alt="Expert ModeraShield" class="rounded-[2rem] shadow-2xl border-4 border-white/20 w-full max-w-[400px] object-cover">
-            </div>
+        <div class="hidden md:flex space-x-8 font-bold">
+            <a href="#missions" class="hover:text-blue-600 transition">Missions</a>
+            <a href="#contact" class="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition">
+                Contact
+            </a>
         </div>
-    </section>
+    </div>
+</nav>
 
-    <section id="missions" class="py-20 container mx-auto px-6">
+<!-- HERO -->
+<section class="pt-32 pb-24 hero-bg text-white">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+
+        <div class="md:w-1/2">
+            <h1 class="hero-title text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                Expertise Humaine pour Espaces Sécurisés
+            </h1>
+
+            <p class="hero-text text-xl opacity-90 mb-10">
+                Solutions professionnelles pour médias et réseaux sociaux. Protection, réactivité et précision.
+            </p>
+
+            <a href="#contact" class="hero-btn bg-white text-blue-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-slate-100 transition">
+                Nous Contacter
+            </a>
+        </div>
+
+        <div class="md:w-1/2 flex justify-center">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296"
+                 class="parallax rounded-3xl shadow-2xl w-full max-w-[420px]">
+        </div>
+
+    </div>
+</section>
+
+<!-- MISSIONS -->
+<section id="missions" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black text-slate-800 uppercase italic">Nos Missions</h2>
-            <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            <h2 class="section-title text-4xl font-black uppercase italic">
+                Nos Missions
+            </h2>
         </div>
+
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center">
+
+            <div class="card glow bg-white p-8 rounded-3xl text-center">
                 <i class="fas fa-comment-slash text-4xl text-blue-600 mb-6"></i>
                 <h3 class="text-xl font-bold mb-4">Modération de flux</h3>
-                <p class="text-slate-600 italic text-lg tracking-tight">Suppression précise des contenus toxiques selon vos règles.</p>
+                <p class="text-slate-600">Suppression précise des contenus toxiques selon vos règles.</p>
             </div>
-            <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center">
+
+            <div class="card glow bg-white p-8 rounded-3xl text-center">
                 <i class="fas fa-user-shield text-4xl text-blue-600 mb-6"></i>
                 <h3 class="text-xl font-bold mb-4">Gestion Alertes</h3>
-                <p class="text-slate-600 italic text-lg tracking-tight">Réaction ultra-rapide sur les signalements critiques.</p>
+                <p class="text-slate-600">Réaction rapide sur les signalements critiques.</p>
             </div>
-            <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center">
+
+            <div class="card glow bg-white p-8 rounded-3xl text-center">
                 <i class="fas fa-graduation-cap text-4xl text-blue-600 mb-6"></i>
                 <h3 class="text-xl font-bold mb-4">Pédagogie</h3>
-                <p class="text-slate-600 italic text-lg tracking-tight">Dialogue pour assainir durablement vos espaces.</p>
+                <p class="text-slate-600">Dialogue pour assainir durablement vos espaces.</p>
             </div>
-        </div>
-    </section>
 
-    <section id="contact" class="py-20 bg-slate-900 text-white text-center rounded-t-[3rem]">
-        <div class="container mx-auto px-6 font-bold tracking-tight uppercase">
-            <h2 class="text-4xl font-black mb-8 italic">Un projet de modération ?</h2>
-            <p class="text-xl text-slate-400 mb-12 italic tracking-normal">Mettons mes 5 ans d'expérience au service de votre sérénité.</p>
-            <a href="mailto:contact@moderashield.com" class="inline-block bg-blue-600 text-white px-12 py-5 rounded-full text-xl font-black hover:bg-blue-700 shadow-xl transition">
-                ME CONTACTER PAR EMAIL
-            </a>
-            <p class="mt-8 text-blue-400">contact@moderashield.com</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer class="py-10 text-center text-slate-400 text-sm font-bold italic border-t border-slate-200">
-        <p>&copy; 2026 MODERASHIELD - Services Experts.</p>
-    </footer>
+<!-- CONTACT -->
+<section id="contact" class="py-24 bg-slate-900 text-white text-center">
+    <div class="max-w-3xl mx-auto px-6">
+
+        <h2 class="contact-title text-4xl font-black mb-8 italic">
+            Un projet de modération ?
+        </h2>
+
+        <p class="mb-10 text-slate-400">
+            Discutons de vos besoins et sécurisons vos espaces dès maintenant.
+        </p>
+
+        <a href="mailto:contact@moderashield.com"
+           class="bg-blue-600 px-12 py-5 rounded-full text-xl font-bold hover:bg-blue-700 transition">
+            Me contacter
+        </a>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 text-center text-slate-400 text-sm">
+    © 2026 MODERASHIELD
+</footer>
+
+<!-- GSAP SCRIPT -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// HERO ANIMATION
+gsap.from(".hero-title", {
+    y: 50,
+    opacity: 0,
+    duration: 1
+});
+
+gsap.from(".hero-text", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    delay: 0.3
+});
+
+gsap.from(".hero-btn", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    delay: 0.6
+});
+
+// SECTION TITLES
+gsap.utils.toArray(".section-title").forEach(el => {
+    gsap.from(el, {
+        scrollTrigger: el,
+        y: 40,
+        opacity: 0,
+        duration: 1
+    });
+});
+
+// CARDS
+gsap.utils.toArray(".card").forEach((el, i) => {
+    gsap.from(el, {
+        scrollTrigger: el,
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        delay: i * 0.2
+    });
+});
+
+// CONTACT
+gsap.from(".contact-title", {
+    scrollTrigger: ".contact-title",
+    y: 40,
+    opacity: 0,
+    duration: 1
+});
+
+// PARALLAX IMAGE
+window.addEventListener("scroll", () => {
+    document.querySelectorAll(".parallax").forEach(el => {
+        let offset = window.scrollY * 0.2;
+        el.style.transform = `translateY(${offset}px)`;
+    });
+});
+</script>
 
 </body>
 </html>
