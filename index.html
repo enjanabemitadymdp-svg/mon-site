@@ -3,200 +3,508 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ModeraShield | Content Moderation Experts</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+<title>ModeraShield | Modération de Contenus</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blue-dark: #0f172a;
+  --blue-mid: #1e3a8a;
+  --blue: #2563eb;
+  --blue-light: #dbeafe;
+  --surface: #f8fafc;
+  --white: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: rgba(0,0,0,0.07);
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text); background: var(--white); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 68px;
+}
+.logo {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue-mid); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-size: 14px; color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--blue-dark); color: #fff;
+  font-family: var(--font-body); font-size: 13px; font-weight: 400;
+  padding: 10px 22px; border-radius: 6px; text-decoration: none;
+  transition: background 0.2s; letter-spacing: 0.01em;
+}
+.nav-cta:hover { background: var(--blue-mid); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
 .hero-bg {
-    background: linear-gradient(120deg, #0f172a, #1e3a8a);
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #060e1f 0%, #0f2250 50%, #1a3a8a 100%);
 }
-.section {
-    padding: 100px 0;
+.hero-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.28; mix-blend-mode: luminosity;
 }
-.img-box img {
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(6,14,31,0.85) 0%, rgba(6,14,31,0.3) 100%);
 }
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1120px; margin: 0 auto; padding: 0 2rem;
+  padding-top: 80px;
+  display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
+  width: 100%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.18);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 12px; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em; margin-bottom: 28px;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 58px);
+  color: #fff; line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+.hero h1 em { font-style: italic; color: rgba(255,255,255,0.55); }
+.hero-sub {
+  font-size: 16px; color: rgba(255,255,255,0.58);
+  line-height: 1.75; margin-bottom: 40px; max-width: 440px;
+  font-weight: 300;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-white {
+  background: #fff; color: var(--blue-dark);
+  font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  padding: 13px 28px; border-radius: 7px; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-white:hover { opacity: 0.88; }
+.btn-ghost {
+  background: rgba(255,255,255,0.08); color: #fff;
+  border: 0.5px solid rgba(255,255,255,0.22);
+  font-family: var(--font-body); font-size: 14px;
+  padding: 13px 28px; border-radius: 7px; text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.15); }
+
+/* Hero dashboard widget */
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.14);
+  border-radius: 16px; padding: 28px;
+  backdrop-filter: blur(4px);
+}
+.dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dash-title { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; }
+.live-badge {
+  background: rgba(74,222,128,0.15); color: #4ade80;
+  font-size: 11px; padding: 4px 10px; border-radius: 12px;
+  border: 0.5px solid rgba(74,222,128,0.3);
+}
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+.stat-c { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 12px; }
+.stat-v { font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 3px; }
+.stat-l { font-size: 10px; color: rgba(255,255,255,0.42); }
+.feed-lbl { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.feed-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 0.5px solid rgba(255,255,255,0.07); }
+.tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+.tag-ok  { background: rgba(74,222,128,0.15); color: #4ade80; }
+.tag-bad { background: rgba(248,113,113,0.15); color: #f87171; }
+.tag-warn{ background: rgba(251,191,36,0.15); color: #fbbf24; }
+.feed-text { font-size: 12px; color: rgba(255,255,255,0.45); flex: 1; }
+.feed-time { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* ── TRUSTED ── */
+.trusted { background: var(--white); border-top: 0.5px solid var(--border); padding: 28px 2rem; }
+.trusted-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
+.trusted-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+.trusted-logos { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+.trusted-logos span { font-size: 14px; color: #94a3b8; font-weight: 500; letter-spacing: 0.04em; }
+
+/* ── SECTION BASE ── */
+.section { padding: 96px 2rem; }
+.section-inner { max-width: 1120px; margin: 0 auto; }
+.label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+h2 {
+  font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400; line-height: 1.2; letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.section-sub { font-size: 16px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+/* ── PROBLEM ── */
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 52px; }
+.problem-list { display: flex; flex-direction: column; gap: 16px; }
+.problem-item {
+  display: flex; gap: 16px; padding: 20px;
+  background: var(--surface); border-radius: 12px;
+  border: 0.5px solid var(--border);
+}
+.prob-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.prob-icon.r { background: #fee2e2; }
+.prob-icon.y { background: #fef9c3; }
+.prob-icon.b { background: var(--blue-light); }
+.prob-title { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+.prob-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+.chart-box { background: var(--surface); border-radius: 16px; border: 0.5px solid var(--border); padding: 28px; }
+.chart-lbl { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.bar-name { font-size: 12px; color: var(--muted); width: 110px; flex-shrink: 0; }
+.bar-track { flex: 1; background: #e2e8f0; border-radius: 4px; height: 7px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; }
+.bar-fill.r { background: #ef4444; }
+.bar-fill.g { background: #22c55e; }
+.bar-pct { font-size: 12px; font-weight: 500; width: 40px; text-align: right; }
+.divider { height: 0.5px; background: var(--border); margin: 20px 0; }
+
+/* ── SERVICES ── */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+.service-card {
+  background: var(--white); border: 0.5px solid var(--border);
+  border-radius: 14px; padding: 28px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  cursor: default;
+}
+.service-card:hover {
+  border-color: rgba(37,99,235,0.25);
+  box-shadow: 0 4px 28px rgba(37,99,235,0.07);
+}
+.svc-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--blue-light); margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.svc-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* ── PROCESS ── */
+.process-section { background: var(--blue-dark); }
+.process-section h2 { color: #fff; }
+.process-section .label { color: rgba(255,255,255,0.4); }
+.process-section .section-sub { color: rgba(255,255,255,0.45); }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 52px; position: relative; }
+.steps::before {
+  content: '';
+  position: absolute; top: 28px; left: 12.5%; right: 12.5%;
+  height: 0.5px; background: rgba(255,255,255,0.1); z-index: 0;
+}
+.step { text-align: center; position: relative; z-index: 1; padding: 0 16px; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15);
+  color: #fff; font-size: 18px; font-family: var(--font-display);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+.step-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; }
+
+/* ── RESULTS ── */
+.results-section { background: var(--surface); }
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 52px; }
+.result-card {
+  background: var(--white); border: 0.5px solid var(--border);
+  border-radius: 14px; padding: 28px 24px; text-align: center;
+}
+.result-val {
+  font-family: var(--font-display); font-size: 42px; font-weight: 400;
+  color: var(--blue-mid); margin-bottom: 8px; line-height: 1;
+}
+.result-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── CTA ── */
+.cta-section {
+  background: linear-gradient(135deg, #060e1f 0%, #0f2250 60%, #1e3a8a 100%);
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: -60px;
+  background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-section h2 { color: #fff; position: relative; }
+.cta-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 40px; font-weight: 300; line-height: 1.7; position: relative; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+.cta-section .label { color: rgba(255,255,255,0.35); }
+
+/* ── FOOTER ── */
+footer {
+  background: #060e1f; color: rgba(255,255,255,0.3);
+  padding: 32px 2rem; text-align: center; font-size: 13px;
+}
+footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+footer a:hover { color: rgba(255,255,255,0.7); }
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
 </style>
 </head>
-
-<body class="bg-white text-slate-900">
+<body>
 
 <!-- NAV -->
-<nav class="fixed w-full bg-white shadow z-50">
-<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
-<div class="font-black text-blue-700 text-xl">MODERASHIELD</div>
-<div class="space-x-6 hidden md:flex">
-<a href="#services">Services</a>
-<a href="#process">Process</a>
-<a href="#contact">Contact</a>
-</div>
-</div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">ModeraShield</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#processus">Processus</a>
+      <a href="#resultats">Résultats</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Demander une démo</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero-bg text-white pt-32 pb-24">
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-
-<div>
-<h1 class="hero text-5xl font-extrabold mb-6">
-Sécurisez vos plateformes à grande échelle
-</h1>
-<p class="mb-8 text-lg opacity-80">
-Modération humaine experte pour médias, réseaux sociaux et plateformes communautaires.
-</p>
-<a href="#contact" class="bg-blue-600 px-8 py-4 rounded-full font-bold">
-Demander une démo
-</a>
-</div>
-
-<div>
-<img src="1000043793.jpg">
-</div>
-
-</div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <img class="hero-img" src="1000043793.jpg" alt="">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge fade-up"><span class="dot"></span> Disponible 24h/24, 7j/7</div>
+      <h1 class="fade-up delay-1">Protégez vos<br><em>plateformes</em><br>à grande échelle</h1>
+      <p class="hero-sub fade-up delay-2">Modération humaine experte pour médias, réseaux sociaux et plateformes communautaires. Réponse garantie en moins de 2h.</p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#contact" class="btn-white">Demander une démo</a>
+        <a href="#services" class="btn-ghost">Voir nos services</a>
+      </div>
+    </div>
+    <div class="hero-card fade-up delay-2">
+      <div class="dash-header">
+        <span class="dash-title">Tableau de bord — temps réel</span>
+        <span class="live-badge">● Live</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat-c"><div class="stat-v">12 843</div><div class="stat-l">Contenus traités</div></div>
+        <div class="stat-c"><div class="stat-v">98,4%</div><div class="stat-l">Précision</div></div>
+        <div class="stat-c"><div class="stat-v">1h 42m</div><div class="stat-l">Délai moyen</div></div>
+      </div>
+      <div class="feed-lbl">Flux récents</div>
+      <div class="feed-item"><span class="tag tag-ok">Approuvé</span><span class="feed-text">Commentaire #48291</span><span class="feed-time">il y a 2 min</span></div>
+      <div class="feed-item"><span class="tag tag-bad">Supprimé</span><span class="feed-text">Contenu signalé #48290</span><span class="feed-time">il y a 5 min</span></div>
+      <div class="feed-item"><span class="tag tag-warn">En révision</span><span class="feed-text">Publication #48289</span><span class="feed-time">il y a 8 min</span></div>
+    </div>
+  </div>
 </section>
 
-<!-- SECTION PROBLÈME -->
-<section class="section bg-slate-50">
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-
-<div class="img-box">
-<img src="https://images.unsplash.com/photo-1553877522-43269d4ea984">
+<!-- TRUSTED -->
+<div class="trusted">
+  <div class="trusted-inner">
+    <span class="trusted-lbl">Ils nous font confiance</span>
+    <div class="trusted-logos">
+      <span>Médias Plus</span>
+      <span>OpenForum</span>
+      <span>StreamCity</span>
+      <span>CommuneNet</span>
+      <span>TalkSpace</span>
+    </div>
+  </div>
 </div>
 
-<div>
-<h2 class="text-3xl font-bold mb-6">Le problème</h2>
-<p class="mb-4">
-Les plateformes font face à une explosion de contenus toxiques, illégaux ou nuisibles.
-</p>
-<p>
-Sans modération efficace, les risques juridiques et réputationnels explosent.
-</p>
-</div>
-
-</div>
-</section>
-
-<!-- SECTION SOLUTION -->
+<!-- PROBLEM -->
 <section class="section">
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-
-<div>
-<h2 class="text-3xl font-bold mb-6">Notre solution</h2>
-<p class="mb-4">
-Une modération humaine rapide, précise et alignée avec votre ligne éditoriale.
-</p>
-<ul class="space-y-2">
-<li>✔ Détection des contenus toxiques</li>
-<li>✔ Traitement en masse</li>
-<li>✔ Respect des règles internes</li>
-</ul>
-</div>
-
-<div class="img-box">
-<img src="https://images.unsplash.com/photo-1549921296-3a6b6b1c9f9f">
-</div>
-
-</div>
+  <div class="section-inner">
+    <div class="label fade-up">Le problème</div>
+    <h2 class="fade-up delay-1">Les plateformes sont débordées</h2>
+    <p class="section-sub fade-up delay-2">Sans modération efficace, les risques juridiques, réputationnels et humains explosent rapidement.</p>
+    <div class="problem-grid">
+      <div class="problem-list">
+        <div class="problem-item fade-up">
+          <div class="prob-icon r">⚠️</div>
+          <div>
+            <div class="prob-title">Explosion des contenus toxiques</div>
+            <div class="prob-desc">Les volumes augmentent de 40% par an. Les outils automatiques seuls ne suffisent plus.</div>
+          </div>
+        </div>
+        <div class="problem-item fade-up delay-1">
+          <div class="prob-icon y">⚖️</div>
+          <div>
+            <div class="prob-title">Risques juridiques croissants</div>
+            <div class="prob-desc">DSA, loi HAINE, NetzDG — les régulations se durcissent dans toute l'Europe.</div>
+          </div>
+        </div>
+        <div class="problem-item fade-up delay-2">
+          <div class="prob-icon b">📉</div>
+          <div>
+            <div class="prob-title">Impact sur la réputation</div>
+            <div class="prob-desc">Un seul incident mal géré peut coûter des millions et des millions d'utilisateurs.</div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-box fade-up delay-1">
+        <div class="chart-lbl">Coût moyen d'un incident non modéré</div>
+        <div class="bar-row"><span class="bar-name">Amende légale</span><div class="bar-track"><div class="bar-fill r" style="width:85%"></div></div><span class="bar-pct">850k€</span></div>
+        <div class="bar-row"><span class="bar-name">Perte utilisateurs</span><div class="bar-track"><div class="bar-fill r" style="width:70%"></div></div><span class="bar-pct">−23%</span></div>
+        <div class="bar-row"><span class="bar-name">Impact médiatique</span><div class="bar-track"><div class="bar-fill r" style="width:55%"></div></div><span class="bar-pct">×12</span></div>
+        <div class="divider"></div>
+        <div class="chart-lbl">Avec ModeraShield</div>
+        <div class="bar-row"><span class="bar-name">Conformité DSA</span><div class="bar-track"><div class="bar-fill g" style="width:98%"></div></div><span class="bar-pct">98%</span></div>
+        <div class="bar-row"><span class="bar-name">Réduction risques</span><div class="bar-track"><div class="bar-fill g" style="width:91%"></div></div><span class="bar-pct">−91%</span></div>
+        <div class="bar-row"><span class="bar-name">Satisfaction équipes</span><div class="bar-track"><div class="bar-fill g" style="width:88%"></div></div><span class="bar-pct">+88%</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section bg-slate-50">
-<div class="max-w-7xl mx-auto px-6">
-
-<h2 class="text-4xl font-black text-center mb-12">
-Nos services
-</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="service p-8 bg-white shadow rounded-xl">
-<h3 class="font-bold mb-4">Modération</h3>
-<p>Validation et suppression des contenus.</p>
-</div>
-
-<div class="service p-8 bg-white shadow rounded-xl">
-<h3 class="font-bold mb-4">Signalements</h3>
-<p>Gestion rapide des contenus signalés.</p>
-</div>
-
-<div class="service p-8 bg-white shadow rounded-xl">
-<h3 class="font-bold mb-4">Support utilisateurs</h3>
-<p>Réponse et pédagogie.</p>
-</div>
-
-</div>
-
-</div>
+<section id="services" class="section" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="label fade-up">Nos services</div>
+    <h2 class="fade-up delay-1">Tout ce dont votre plateforme a besoin</h2>
+    <p class="section-sub fade-up delay-2">Des équipes expertes formées à vos règles, disponibles 24h/24.</p>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="svc-icon">🛡️</div>
+        <div class="svc-title">Modération de contenus</div>
+        <div class="svc-desc">Validation, signalement et suppression selon vos guidelines éditoriaux. Couverture multi-formats : texte, image, vidéo.</div>
+      </div>
+      <div class="service-card fade-up delay-1">
+        <div class="svc-icon">🔔</div>
+        <div class="svc-title">Gestion des signalements</div>
+        <div class="svc-desc">Traitement rapide des contenus signalés par vos utilisateurs avec réponse garantie sous 2h.</div>
+      </div>
+      <div class="service-card fade-up delay-2">
+        <div class="svc-icon">💬</div>
+        <div class="svc-title">Support utilisateurs</div>
+        <div class="svc-desc">Réponses pédagogiques et humaines aux utilisateurs concernés par une décision de modération.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">📊</div>
+        <div class="svc-title">Reporting & Analytics</div>
+        <div class="svc-desc">Tableaux de bord en temps réel, rapports mensuels et insights sur les tendances et comportements.</div>
+      </div>
+      <div class="service-card fade-up delay-1">
+        <div class="svc-icon">⚖️</div>
+        <div class="svc-title">Conformité réglementaire</div>
+        <div class="svc-desc">Veille et adaptation continue aux évolutions légales : DSA, RGPD, loi HAINE, NetzDG.</div>
+      </div>
+      <div class="service-card fade-up delay-2">
+        <div class="svc-icon">🤖</div>
+        <div class="svc-title">Audit IA + Humain</div>
+        <div class="svc-desc">Combinaison de détection automatique et d'experts pour une précision et une couverture maximales.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PROCESS -->
-<section id="process" class="section">
-<div class="max-w-7xl mx-auto px-6">
-
-<h2 class="text-4xl font-black text-center mb-16">
-Comment ça marche
-</h2>
-
-<div class="grid md:grid-cols-4 gap-6 text-center">
-
-<div>
-<h3 class="font-bold mb-2">1</h3>
-<p>Analyse des besoins</p>
-</div>
-
-<div>
-<h3 class="font-bold mb-2">2</h3>
-<p>Intégration</p>
-</div>
-
-<div>
-<h3 class="font-bold mb-2">3</h3>
-<p>Modération active</p>
-</div>
-
-<div>
-<h3 class="font-bold mb-2">4</h3>
-<p>Reporting</p>
-</div>
-
-</div>
-
-</div>
+<section id="processus" class="section process-section">
+  <div class="section-inner">
+    <div class="label fade-up">Notre processus</div>
+    <h2 class="fade-up delay-1">Opérationnel en 7 jours</h2>
+    <p class="section-sub fade-up delay-2">Un onboarding structuré pour une prise en charge rapide et sans friction.</p>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">1</div>
+        <div class="step-title">Analyse des besoins</div>
+        <div class="step-desc">Audit de votre plateforme et définition des règles de modération adaptées.</div>
+      </div>
+      <div class="step fade-up delay-1">
+        <div class="step-num">2</div>
+        <div class="step-title">Intégration</div>
+        <div class="step-desc">Connexion à vos outils existants et formation de l'équipe à vos guidelines.</div>
+      </div>
+      <div class="step fade-up delay-2">
+        <div class="step-num">3</div>
+        <div class="step-title">Modération active</div>
+        <div class="step-desc">Prise en charge 24h/24 avec escalade pour les cas complexes ou sensibles.</div>
+      </div>
+      <div class="step fade-up delay-3">
+        <div class="step-num">4</div>
+        <div class="step-title">Reporting mensuel</div>
+        <div class="step-desc">Bilan complet, recommandations et ajustements continus selon vos évolutions.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section bg-slate-900 text-white text-center">
-<h2 class="text-4xl font-black mb-6">Contact</h2>
-<p class="mb-6">Discutons de votre projet</p>
-
-<a href="mailto:contact@moderashield.com"
-class="bg-blue-600 px-10 py-4 rounded-full font-bold">
-Nous contacter
-</a>
+<!-- RESULTS -->
+<section id="resultats" class="section results-section">
+  <div class="section-inner">
+    <div class="label fade-up">Résultats</div>
+    <h2 class="fade-up delay-1">Ce que nos clients obtiennent</h2>
+    <p class="section-sub fade-up delay-2">Des chiffres concrets, mesurés sur l'ensemble de notre portefeuille clients.</p>
+    <div class="results-grid">
+      <div class="result-card fade-up"><div class="result-val">98%</div><div class="result-lbl">Taux de conformité réglementaire</div></div>
+      <div class="result-card fade-up delay-1"><div class="result-val">−91%</div><div class="result-lbl">Réduction des incidents signalés</div></div>
+      <div class="result-card fade-up delay-2"><div class="result-val">&lt;2h</div><div class="result-lbl">Délai moyen de traitement</div></div>
+      <div class="result-card fade-up delay-3"><div class="result-val">40M+</div><div class="result-lbl">Contenus modérés chaque mois</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- GSAP -->
+<!-- CTA -->
+<section id="contact" class="section cta-section">
+  <div class="section-inner">
+    <div class="label fade-up">Parlons de votre projet</div>
+    <h2 class="fade-up delay-1" style="max-width: 520px; margin: 0 auto 18px;">Prêt à sécuriser votre plateforme ?</h2>
+    <p class="cta-sub fade-up delay-2" style="max-width: 440px; margin: 0 auto 40px;">30 minutes avec notre équipe pour évaluer vos besoins et vous proposer une solution sur mesure. Sans engagement.</p>
+    <div class="cta-actions fade-up delay-3">
+      <a href="mailto:contact@moderashield.com" class="btn-white">Demander une démo gratuite</a>
+      <a href="mailto:contact@moderashield.com" class="btn-ghost">contact@moderashield.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 ModeraShield — <a href="mailto:contact@moderashield.com">contact@moderashield.com</a> — Tous droits réservés</p>
+</footer>
+
 <script>
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.utils.toArray("section").forEach(sec => {
-gsap.from(sec, {
-scrollTrigger: sec,
-opacity: 0,
-y: 50,
-duration: 1
-});
-});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
